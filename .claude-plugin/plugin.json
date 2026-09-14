@@ -6,8 +6,8 @@
     "name": "Kalera",
     "url": "https://kalera.app"
   },
-  "homepage": "https://github.com/3d-era/kalera-claude-code",
-  "repository": "https://github.com/3d-era/kalera-claude-code",
+  "homepage": "https://github.com/kalera-labs/kalera-claude-code",
+  "repository": "https://github.com/kalera-labs/kalera-claude-code",
   "license": "MIT",
   "keywords": [
     "claude-code",

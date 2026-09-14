@@ -36,8 +36,8 @@ $ProgressPreference    = 'SilentlyContinue'
 #   3. Paste the result into INSTALL_PS1_PIN below.
 #   4. git commit + git push.
 $INSTALL_PS1_PIN = "93f26d2782732f28aa6781c13996547ad6865ce39c7ae000a76a52a28c413418"
-$REPO_URL        = "https://github.com/3d-era/kalera-claude-code.git"
-$GITHUB_RAW      = "https://raw.githubusercontent.com/3d-era/kalera-claude-code/main/install.ps1"
+$REPO_URL        = "https://github.com/kalera-labs/kalera-claude-code.git"
+$GITHUB_RAW      = "https://raw.githubusercontent.com/kalera-labs/kalera-claude-code/main/install.ps1"
 
 # ─── Helpers ───────────────────────────────────────────────────────
 function Get-NormalizedHash {
@@ -329,7 +329,7 @@ if ($hasOldECC) {
 
 if ($hasOldMunin) {
     Write-Host "⚠️  CONFLICT: Munin detected from old source" -ForegroundColor Yellow
-    Write-Host "   Source: munin-ecosystem (3d-era/munin-for-agents)"
+    Write-Host "   Source: munin-ecosystem (kalera-labs/munin-for-agents)"
     Write-Host "   → kalera-claude-code includes the latest Munin plugin."
     Write-Host ""
 
@@ -369,10 +369,10 @@ Write-Host ""
 # ─── Add marketplace ───────────────────────────────────────────────
 Write-Step "📦 Adding Kalera marketplace..."
 if ($DryRun) {
-    Write-Info "[dry-run] would: claude plugin marketplace add 3d-era/kalera-claude-code"
+    Write-Info "[dry-run] would: claude plugin marketplace add kalera-labs/kalera-claude-code"
 }
 else {
-    $mktResult = claude plugin marketplace add 3d-era/kalera-claude-code 2>&1
+    $mktResult = claude plugin marketplace add kalera-labs/kalera-claude-code 2>&1
     $mktRc     = $LASTEXITCODE
     if ($mktRc -ne 0) {
         Write-Info "Marketplace add failed (rc=$mktRc): $mktResult"
@@ -390,7 +390,7 @@ if (-not $DryRun) {
         Write-Host "   ✅ kalera-claude-code installed" -ForegroundColor Green
     }
     elseif ($eccRc -eq 2) {
-        Write-Fail "   Plugin 'kalera-claude-code' not found in marketplace '3d-era/kalera-claude-code'"
+        Write-Fail "   Plugin 'kalera-claude-code' not found in marketplace 'kalera-labs/kalera-claude-code'"
     }
     elseif ($eccRc -eq 3) {
         Write-Fail "   Plugin 'kalera-claude-code' already installed — skip or uninstall first"
@@ -418,7 +418,7 @@ if (-not $DryRun) {
         Write-Host "   ✅ munin-claude-code installed" -ForegroundColor Green
     }
     elseif ($munRc -eq 2) {
-        Write-Fail "   Plugin not found on marketplace '3d-era/kalera-claude-code'"
+        Write-Fail "   Plugin not found on marketplace 'kalera-labs/kalera-claude-code'"
     }
     elseif ($munRc -eq 3) {
         Write-Fail "   Plugin already installed — skip or uninstall first"
@@ -495,4 +495,4 @@ Write-Host "  2. Sign up at https://munin.kalera.ai (free)"
 Write-Host "  3. Run: /munin:projectid"
 Write-Host "     → It will show current ID or prompt you to set it"
 Write-Host ""
-Write-Host "Docs: https://github.com/3d-era/kalera-claude-code"
+Write-Host "Docs: https://github.com/kalera-labs/kalera-claude-code"

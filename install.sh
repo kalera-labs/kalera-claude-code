@@ -3,8 +3,8 @@
 # Installs kalera-claude-code + Munin memory system into Claude Code
 #
 # Usage (Linux/macOS):
-#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/3d-era/kalera-claude-code/main/install.sh)"
-#   git clone https://github.com/3d-era/kalera-claude-code.git && cd kalera-claude-code && ./install.sh
+#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/kalera-labs/kalera-claude-code/main/install.sh)"
+#   git clone https://github.com/kalera-labs/kalera-claude-code.git && cd kalera-claude-code && ./install.sh
 #
 # Usage (Windows):
 #   powershell -ExecutionPolicy Bypass -File install.ps1
@@ -45,7 +45,7 @@ _compute_pin() {
 
 _verify_and_exec() {
   local _tmp=$(mktemp)
-  curl -fsSL https://raw.githubusercontent.com/3d-era/kalera-claude-code/main/install.sh -o "$_tmp"
+  curl -fsSL https://raw.githubusercontent.com/kalera-labs/kalera-claude-code/main/install.sh -o "$_tmp"
   local _sha=$(_compute_pin "$_tmp")
   if [[ -z "$_sha" ]]; then
     echo "❌ Could not compute SHA256 of downloaded script" >&2
@@ -283,7 +283,7 @@ if [[ ! -d "$REPO_DIR/.claude-plugin" ]]; then
   fi
   IS_CURL_MODE=true
   echo "Cloning kalera-claude-code..."
-  if ! git clone --depth 1 https://github.com/3d-era/kalera-claude-code.git "$REPO_DIR"; then
+  if ! git clone --depth 1 https://github.com/kalera-labs/kalera-claude-code.git "$REPO_DIR"; then
     echo "❌ Git clone failed — check network and try again" >&2
     exit 1
   fi
@@ -391,7 +391,7 @@ fi
 # ─── Handle Munin conflict ─────────────────────────────────────────
 if [[ "$HAS_OLD_MUNIN" == true ]]; then
   echo "⚠️  CONFLICT: Munin detected from old source"
-  echo "   Source: munin-ecosystem (3d-era/munin-for-agents)"
+  echo "   Source: munin-ecosystem (kalera-labs/munin-for-agents)"
   echo "   → kalera-claude-code includes the latest Munin plugin."
   echo ""
   _choice=$(ask "  [1] Auto-fix  [2] Skip (keep old)")
@@ -450,9 +450,9 @@ echo ""
 # ─── Add marketplace ───────────────────────────────────────────────
 echo "📦 Adding Kalera marketplace..."
 if [[ "$DRY_RUN" == true ]]; then
-  echo "   [dry-run] would: claude plugin marketplace add 3d-era/kalera-claude-code"
+  echo "   [dry-run] would: claude plugin marketplace add kalera-labs/kalera-claude-code"
 else
-  _mkt_err=$(claude plugin marketplace add 3d-era/kalera-claude-code 2>&1)
+  _mkt_err=$(claude plugin marketplace add kalera-labs/kalera-claude-code 2>&1)
   _mkt_rc=$?
   if [[ $_mkt_rc -ne 0 ]]; then
     echo "   ⚠️  Marketplace add failed (rc=$_mkt_rc): $_mkt_err"
@@ -470,7 +470,7 @@ else
   if [[ $_ecc1_rc -eq 0 ]]; then
     echo "   ✅ kalera-claude-code installed"
   elif [[ $_ecc1_rc -eq 2 ]]; then
-    echo "   ❌ Plugin 'kalera-claude-code' not found in marketplace '3d-era/kalera-claude-code'"
+    echo "   ❌ Plugin 'kalera-claude-code' not found in marketplace 'kalera-labs/kalera-claude-code'"
   elif [[ $_ecc1_rc -eq 3 ]]; then
     echo "   ❌ Plugin 'kalera-claude-code' already installed — skip or uninstall first"
   else
@@ -500,7 +500,7 @@ else
   if [[ $_mun_rc -eq 0 ]]; then
     echo "   ✅ munin-claude-code installed"
   elif [[ $_mun_rc -eq 2 ]]; then
-    echo "   ❌ Plugin not found on marketplace '3d-era/kalera-claude-code'"
+    echo "   ❌ Plugin not found on marketplace 'kalera-labs/kalera-claude-code'"
   elif [[ $_mun_rc -eq 3 ]]; then
     echo "   ❌ Plugin already installed — skip this step or uninstall first"
   else
@@ -563,4 +563,4 @@ echo "  2. Sign up at https://munin.kalera.ai (free)"
 echo "  3. Run: /munin:projectid"
 echo "     → It will show current ID or prompt you to set it"
 echo ""
-echo "Docs: https://github.com/3d-era/kalera-claude-code"
+echo "Docs: https://github.com/kalera-labs/kalera-claude-code"
