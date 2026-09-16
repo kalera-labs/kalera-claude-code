@@ -14,7 +14,7 @@
       "name": "kalera-claude-code",
       "source": "./",
       "description": "Battle-tested Claude Code plugin — 31 agents, 142 skills, 50 commands, and production-ready hooks. Built on affaan-m/everything-claude-code (50K+ stars, Anthropic hackathon winner). Covers TDD, security scanning, code review, multi-language support, and continuous learning.",
-      "version": "1.4.6",
+      "version": "1.4.7",
       "author": {
         "name": "Kalera",
         "email": "kal@kalera.app"

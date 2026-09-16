@@ -2,6 +2,14 @@
 
 All notable changes to **Kalera Claude Code** are documented here.
 
+## [1.4.7] — 2026-09-17
+
+### Changed
+- **Hooks**: the `PreToolUse` Bash guard against git hook bypass now runs in-process (`scripts/hooks/pre-bash-block-no-verify.js` via `run-with-flags.js`, hook id `pre:bash:block-no-verify`, profiles `minimal,standard,strict`, `timeout: 10`) instead of `npx block-no-verify@1.1.2`. The npx form paid a full npm bootstrap plus a request to registry.npmjs.org on **every Bash tool call** (measured 1.1-1.4 CPU-s and ~1.8 s wall per call, two runaway instances at 100 % CPU on a loaded machine, and no timeout, so an offline network stalled every call for up to 60 s). The in-process hook measures ~0.03 s. The port keeps upstream's rules (`--no-verify` on commit/push/merge/cherry-pick/rebase/am, `-c core.hooksPath=`, `-n` for commit) and can now be switched off with `ECC_DISABLED_HOOKS` like every other hook.
+
+### Fixed
+- **Hooks**: the `-n` (short `--no-verify`) check is scoped to the shell segment that runs `git commit`, so `git commit -m "fix" && grep -n TODO src`, `head -n`, `tail -n`, or a heredoc commit body containing ` -n ` are no longer blocked as hook bypass. Covered by `tests/hooks/pre-bash-block-no-verify.test.js` (26 cases).
+
 ## [1.4.6] — 2026-09-10
 
 ### Fixed

@@ -1,6 +1,6 @@
 {
   "name": "kalera-claude-code",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "Complete Claude Code toolkit — 31 agents, 142 skills, 50 commands, hooks, and rules. Based on affaan-m/everything-claude-code (50K+ stars, Anthropic hackathon winner). Includes Munin long-term memory system.",
   "author": {
     "name": "Kalera",
